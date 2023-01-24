@@ -101,7 +101,7 @@ const UserCart = () => {
           <div className='col-md-12'>
             <br></br>
           <h5>Cart is Empty , please add items...</h5>
-       <img src='https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png'></img>
+       <img style={{display:"block",width:"50%",marginLeft:"auto",marginRight:"auto"}} src='https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png'></img>
        </div>
        </div>
        </div> }

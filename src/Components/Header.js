@@ -26,7 +26,7 @@ function Header() {
             type:EMPTY_PRODUCT
            })} className="navbar navbar-expand-lg bg-light">
   <div className="container-fluid">
-    <Link className="navbar-brand text-dark" to="/">Navbar</Link>
+    <Link className="navbar-brand text-dark" to="/"><img style={{width:"200px",height:"75px"}} src='https://res.cloudinary.com/dw7fovacw/image/upload/v1674574107/Screenshot_182_sgayc6.png'></img></Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>

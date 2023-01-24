@@ -3,13 +3,14 @@ import React from 'react'
 function Home() {
   return (
     
-    <div className='home'>
+    <div style={{display:"block",overflow:"auto"}} className='home bg-dark'>
     <div className='row'>
-    <div className='col-md-12'>
+    <div  className='col-md-12 col-sm-12 '>
      
-     <h1 style={{marginTop:"200px",fontSize:"75px"}} className='text-center '>WE SERVE</h1>
-     <h1 style={{fontSize:"100px",color:"#cc7a00"}} className='text-center '>PASSION</h1>
+     <img style={{display:"block",width:"40%",marginLeft:"auto",marginRight:"auto"}} src='https://res.cloudinary.com/dw7fovacw/image/upload/v1674576404/Chef-cartoon-character-on-transparent-background-PNG_t5aaot.png'></img>
+     
     </div>
+    
     
     </div>
     </div>
