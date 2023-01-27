@@ -4,13 +4,15 @@ import { deleteCookie } from "../Helpers/cookies"
 import { deleteLocalStorage } from "../Helpers/localStorage"
 
 
+const api="https://brick-red-angler-cape.cyclic.app"
 export const signupAuth=async(data)=>
 {
     
    const config={
-    headers:{"Content-Type":"application/json"}
+    headers:{"Content-Type":"application/json"},
+    "withCredentials": true
    }
-   let response= await axios.post("http://localhost:5000/api/auth/signup",data,config)
+   let response= await axios.post(`${api}/api/auth/signup`,data,config)
 
    return response
 
@@ -19,9 +21,10 @@ export const signupAuth=async(data)=>
 export const signinAuth= async(data)=>
 {
    const config={
-      headers:{"Content-Type":"application/json"}
+      headers:{"Content-Type":"application/json"},
+      "withCredentials": true
    }
-   let response= await axios.post("http://localhost:5000/api/auth/signin",data,config)
+   let response= await axios.post(`${api}/api/auth/signin`,data,config)
    return response
 }
 export const logout=(next)=>

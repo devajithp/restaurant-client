@@ -4,9 +4,10 @@ import { getProduct } from '../redux/actions/productActions'
 import { EDIT_PRODUCT, EMPTY_PRODUCT, GET_PRODUCT } from '../redux/constants/productConstants'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 function AdminEditProduct(props) {
-   
+  const api="https://brick-red-angler-cape.cyclic.app"
     const history=useHistory()
     const productId=props.match.params.id
    
@@ -22,13 +23,13 @@ function AdminEditProduct(props) {
     },[dispatch])
 
     
-    console.log(product)
+    
     // const{productCategory,productDescription,productImage,productName,productPrice,productQty,...rest}=product
     const [productData,setProductData]=useState({...product})
     
     const handleImage=(e)=>
     {
-      console.log(e.target.files[0])
+      
       const imageData=new FormData()
       imageData.append("file",e.target.files[0])
       imageData.append("upload_preset","hryarpdg")
@@ -37,7 +38,7 @@ function AdminEditProduct(props) {
       }
       axios.post("https://api.cloudinary.com/v1_1/dw7fovacw/image/upload",imageData,config).then((res)=>
       {
-        console.log(res.data.secure_url)
+        
         
          setProductData({
           ...product,
@@ -66,14 +67,14 @@ function AdminEditProduct(props) {
         console.log("fill all fields")
       }
       else{
-
+        const token = Cookies.get("token")
         const config={
-          headers:{"Content-Type":"application/json"},
+          headers:{"Content-Type":"application/json","token":token},
           "withCredentials":true
         }
-        axios.patch(`http://localhost:5000/api/product/editProduct/${productId}`,productData,config).then((res)=>
+        axios.patch(`${api}/api/product/editProduct/${productId}`,productData,config).then((res)=>
         {
-            console.log(res.data)
+            
             dispatch({
               type:EDIT_PRODUCT,
               payload:res.data

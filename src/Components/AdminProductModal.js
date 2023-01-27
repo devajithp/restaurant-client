@@ -80,7 +80,7 @@ function AdminProductModal() {
 
     axios.post("https://api.cloudinary.com/v1_1/dw7fovacw/image/upload",imageData,config).then((res)=>
     {
-      console.log(res.data.secure_url)
+      
         
       setProductData({...productData,[e.target.name]:res.data.secure_url})
     })

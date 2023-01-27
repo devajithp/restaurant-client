@@ -1,7 +1,8 @@
 import React, { useContext, useEffect,useState } from 'react'
 import axios from 'axios'
-import { Link, useHistory } from "react-router-dom"
+import {  useHistory } from "react-router-dom"
 import { thingsProvider } from './App'
+import Cookies from 'js-cookie'
 
 const UserCart = () => {
     const[status,setStatus]=useState(true)
@@ -10,12 +11,12 @@ const UserCart = () => {
     const [refresh,setRefresh]=useState(false)
     const history=useHistory()
     const {totalPrice,setTotalPrice}= useContext(thingsProvider)
-    
+    const api="https://brick-red-angler-cape.cyclic.app"
     useEffect(()=>
     {
         let user=JSON.parse(localStorage.getItem("user"))
         let userId=user._id
-        axios.get(`http://localhost:5000/api/cart/getcart/${userId}`).then((res)=>
+        axios.get(`${api}/api/cart/getcart/${userId}`).then((res)=>
         {
             
             if(res.data.length===0||res.data.length===undefined)
@@ -24,7 +25,7 @@ const UserCart = () => {
             }
             else
             {
-                console.log(res.data)
+                
                setCart([...res.data])
                let total=0
                res.data.forEach(data => {
@@ -45,13 +46,14 @@ const UserCart = () => {
         userId,
         productId
       }
+      const token = Cookies.get("token")
       const config={
-        headers:{"Content-Type":"application/json"},
+        headers:{"Content-Type":"application/json","token":token},
         "withCredentials":true
        }
-      axios.patch("http://localhost:5000/api/cart/incquantity",data,config).then((res)=>
+      axios.patch(`${api}/api/cart/incquantity`,data,config).then((res)=>
       {
-        console.log(res.data)
+        
         setRefresh(!refresh)
       })
     }
@@ -63,13 +65,14 @@ const UserCart = () => {
         userId,
         productId
       }
+      const token = Cookies.get("token")
       const config={
-        headers:{"Content-Type":"application/json"},
+        headers:{"Content-Type":"application/json","token":token},
         "withCredentials":true
        }
-      axios.patch("http://localhost:5000/api/cart/decquantity",data,config).then((res)=>
+      axios.patch(`${api}/api/cart/decquantity`,data,config).then((res)=>
       {
-        console.log(res.data)
+        
         setRefresh(!refresh)
       })
       
@@ -82,13 +85,14 @@ const UserCart = () => {
         userId,
         productId
       }
+      const token = Cookies.get("token")
       const config={
-        headers:{"Content-Type":"application/json"},
+        headers:{"Content-Type":"application/json","token":token},
         "withCredentials":true
        }
-      axios.patch("http://localhost:5000/api/cart/removeProduct",data,config).then((res)=>
+      axios.patch(`${api}/api/cart/removeProduct`,data,config).then((res)=>
       {
-        console.log(res.data)
+        
         setRefresh(!refresh)
       })
     }
@@ -101,7 +105,7 @@ const UserCart = () => {
           <div className='col-md-12'>
             <br></br>
           <h5>Cart is Empty , please add items...</h5>
-       <img style={{display:"block",width:"50%",marginLeft:"auto",marginRight:"auto"}} src='https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png'></img>
+       <img alt='emptyimg' style={{display:"block",width:"50%",marginLeft:"auto",marginRight:"auto"}} src='https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-2130356-1800917.png'></img>
        </div>
        </div>
        </div> }
@@ -129,7 +133,7 @@ const UserCart = () => {
     {
         return(
             <tr>
-      <td><img style={{height:"75px",width:"75px"}} src={`${eachProduct.products.productId.productImage}`}></img></td>
+      <td><img alt="prodImg" style={{height:"75px",width:"75px"}} src={`${eachProduct.products.productId.productImage}`}></img></td>
       <td>{eachProduct.products.productId.productName}</td>
       <td><button onClick={()=>DecrementProduct(eachProduct.products.productId._id)} disabled={eachProduct.products.quantity===1} className='btn btn-secondary btn-sm'><i className="fa-solid fa-arrow-down"></i></button> {eachProduct.products.quantity} <button onClick={()=>IncrementProduct(eachProduct.products.productId._id)} className='btn btn-secondary btn-sm'><i class="fa-solid fa-arrow-up"></i></button></td>
       <td><button onClick={()=>RemoveProduct(eachProduct.products.productId._id)} className='btn btn-danger btn-sm'><i class="fa-solid fa-trash"></i></button></td>

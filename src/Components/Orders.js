@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-
+import Cookies from 'js-cookie'
 function Orders() {
+  const api="https://brick-red-angler-cape.cyclic.app"
 const[orders,setOrders]=useState(false)
 const[search,setSearch]=useState("")
     useEffect(()=>
     {
         let user=JSON.parse(localStorage.getItem("user"))
         let userId=user._id
-        axios.get(`http://localhost:5000/api/order/getorders/${userId}`).then((res)=>
+        axios.get(`${api}/api/order/getorders/${userId}`).then((res)=>
         {
-            console.log(res.data)
+          
             setOrders([...res.data])
         })
     },[])
@@ -68,7 +69,7 @@ const[search,setSearch]=useState("")
     {
            return(
             <tr>
-      <td><img style={{width:"50px", height:"50px"}} src={`${product.productId.productImage}`}></img></td>
+      <td><img alt='prodImg' style={{width:"50px", height:"50px"}} src={`${product.productId.productImage}`}></img></td>
       <td>{product.productId.productName}</td>
       <td>{product.quantity}</td>
       <td>{product.productId.productPrice}</td>
@@ -90,9 +91,9 @@ const[search,setSearch]=useState("")
     </div>
     <div>
     <div className="dropdown show">
-  <a className="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button className="btn btn-secondary btn-sm dropdown-toggle"   id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Address
-  </a>
+  </button>
 
   <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
     <p className="dropdown-item" >{order.address.name}</p>

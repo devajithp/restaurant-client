@@ -1,9 +1,11 @@
-import React, { useContext, useEffect,useState } from 'react'
+import React, { useContext,useState } from 'react'
 import { thingsProvider } from './App'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 function OrderSummary() {
+  const api="https://brick-red-angler-cape.cyclic.app"
  const{totalPrice,setTotalPrice}=useContext(thingsProvider) 
  const[errorMessage,setErrorMessage]=useState(false)
  const[Address,setAddress]=useState({name:"",mobileNumber:"",state:"",district:"",pincode:"",houseName:"",landmark:"",payment:""})
@@ -15,7 +17,7 @@ function OrderSummary() {
         ...Address,
         [e.target.name]:e.target.value
      })
-     console.log(Address)
+     
  }
  const handleSubmit=async()=>
  {
@@ -29,7 +31,7 @@ function OrderSummary() {
     else{
         let user=JSON.parse(localStorage.getItem("user"));
         let userId=user._id;
-        let cart= await axios.get(`http://localhost:5000/api/cart/getexactcart/${userId}`)
+        let cart= await axios.get(`${api}/api/cart/getexactcart/${userId}`)
         cart=cart.data[0]
         
         let newOrder={
@@ -43,35 +45,37 @@ function OrderSummary() {
        
         if(Address.payment==="COD")
         {
+          const token = Cookies.get("token")
              let config={
-                 headers:{"Content-Type":"application/json"},
+                 headers:{"Content-Type":"application/json","token":token},
                  "withCredentials":true
              }
              let data={...newOrder}
-             axios.post("http://localhost:5000/api/order/addtoorder",data,config).then((res)=>
+             axios.post(`${api}/api/order/addtoorder`,data,config).then((res)=>
              {
                  setTotalPrice(false)
-                 console.log(res.data)
-                 axios.patch(`http://localhost:5000/api/cart/removeCart/${userId}`).then((res)=>
+                
+                 axios.patch(`${api}/api/cart/removeCart/${userId}`).then((res)=>
                  {
                   history.push("/user/orders")
-                   console.log(res)
+                   
                  })
              })
         }
         else
         {
-            console.log("online payment")
+            //online payment
+            const token = Cookies.get("token")
             let config={
-              headers:{"Content-Type":"application/json"},
+              headers:{"Content-Type":"application/json","token":token},
               "withCredentials":true
           }
           
 
             try {
-              axios.post("http://localhost:5000/api/order/razorpay/initiate",{amount:parseInt(totalPrice)},config).then((res)=>
+              axios.post(`${api}/api/order/razorpay/initiate`,{amount:parseInt(totalPrice)},config).then((res)=>
               {
-                console.log(res.data.data.amount)
+                
                 
                 const options = {
                   key: "rzp_test_PgI8GB7quOoWvr",
@@ -85,18 +89,18 @@ function OrderSummary() {
                     try {
                       
                       
-                      const { data } = await axios.post("http://localhost:5000/api/order/razorpay/verify", response);
-                      console.log(data);
+                      await axios.post(`${api}/api/order/razorpay/verify`, response);
+                      
 
                       let newdata={...newOrder}
-                      axios.post("http://localhost:5000/api/order/addtoorder",newdata,config).then((res)=>
+                      axios.post(`${api}/api/order/addtoorder`,newdata,config).then((res)=>
                       {
                           setTotalPrice(false)
-                          console.log(res.data)
-                          axios.patch(`http://localhost:5000/api/cart/removeCart/${userId}`).then((res)=>
+                          
+                          axios.patch(`${api}/api/cart/removeCart/${userId}`).then((res)=>
                           {
                            history.push("/user/orders")
-                            console.log(res)
+                          
                           })
                       })
 
@@ -115,7 +119,7 @@ function OrderSummary() {
                 rzp1.open();
               })
             } catch (error) {
-              
+              console.log(error)
             }
         }
     }

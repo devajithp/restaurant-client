@@ -17,12 +17,12 @@ function Signup() {
   {
     if(isAuthenticated() && isAuthenticated().role===1)
         {
-          console.log("redirect to admin dashboard")
+          
           history.push("/admin/dashboard")
         }
         else if(isAuthenticated() && isAuthenticated().role===0)
         {
-          console.log("redirect to user dashboard")
+          
           history.push("/user/dashboard")
         }
       
@@ -85,7 +85,7 @@ function Signup() {
 
         signupAuth(data).then((res)=>
         {
-          console.log(res.data.successMessage)
+         
           setFormData({
             ...formData,loading:false,successMsg:res.data.successMessage,username:"",email:"",password:"",password2:""
           })
@@ -93,7 +93,7 @@ function Signup() {
 
         }).catch((err)=>
         {
-          console.log("findError: ",err.response.data.errorMessage)
+        
           setFormData({...formData,loading:false,errorMsg:err.response.data.errorMessage})
         })
 

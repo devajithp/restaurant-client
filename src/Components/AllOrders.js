@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 function AllOrders() {
-
+  const api="https://brick-red-angler-cape.cyclic.app"
     const[orders,setOrders]=useState(false)
     const[refresh,setRefresh]=useState(false)
     const[search,setSearch]=useState("")
@@ -10,9 +11,9 @@ function AllOrders() {
         useEffect(()=>
         {
             
-            axios.get("http://localhost:5000/api/order/getorders").then((res)=>
+            axios.get(`${api}/api/order/getorders`).then((res)=>
             {
-                console.log(res.data)
+                
                 setOrders([...res.data])
             })
         },[refresh])
@@ -23,14 +24,15 @@ function AllOrders() {
         }
         const confirmOrder=(orderId)=>
         {
+          const token = Cookies.get("token")
           let config={
-            headers:{"Content-Type":"application/json"},
+            headers:{"Content-Type":"application/json","token":token},
             "withCredentials":true
           }
           let data={
 
           }
-          axios.patch(`http://localhost:5000/api/order/confirm/${orderId}`,data,config).then((res)=>
+          axios.patch(`${api}/api/order/confirm/${orderId}`,data,config).then((res)=>
           {
             console.log(res.data)
             setRefresh(!refresh)
@@ -39,16 +41,17 @@ function AllOrders() {
         }
         const cancelOrder=(orderId)=>
         {
+          const token = Cookies.get("token")
           let config={
-            headers:{"Content-Type":"application/json"},
+            headers:{"Content-Type":"application/json","token":token},
             "withCredentials":true
           }
           let data={
 
           }
-          axios.patch(`http://localhost:5000/api/order/cancel/${orderId}`,data,config).then((res)=>
+          axios.patch(`${api}/api/order/cancel/${orderId}`,data,config).then((res)=>
           {
-            console.log(res.data)
+            
             setRefresh(!refresh)
             
           })
@@ -102,7 +105,7 @@ function AllOrders() {
 {
        return(
         <tr>
-  <td><img style={{width:"50px", height:"50px"}} src={`${product.productId.productImage}`}></img></td>
+  <td><img alt='prodImg' style={{width:"50px", height:"50px"}} src={`${product.productId.productImage}`}></img></td>
   <td>{product.productId.productName}</td>
   <td>{product.quantity}</td>
   <td>{product.productId.productPrice}</td>
@@ -124,9 +127,9 @@ function AllOrders() {
 </div>
 <div>
 <div className="dropdown show">
-<a className="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<button className="btn btn-secondary btn-sm dropdown-toggle"   id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 Address
-</a>
+</button>
 
 <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
 <p className="dropdown-item" >{order.address.name}</p>

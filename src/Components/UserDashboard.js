@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react'
 
 
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 function UserDashboard() {
    
-   
+  const api="https://brick-red-angler-cape.cyclic.app"
    const[products,setProducts]=useState()
    const[categories,setCategories]=useState()
    const[catProducts,setCatProducts]=useState()
@@ -16,13 +17,13 @@ function UserDashboard() {
    useEffect(()=>
    {
       
-      axios.get("http://localhost:5000/api/product/getProducts").then((res)=>
+      axios.get(`${api}/api/product/getProducts`).then((res)=>
       {
         setProducts(res.data.reverse())
         
        
       })
-      axios.get("http://localhost:5000/api/category/getCategories").then((res)=>
+      axios.get(`${api}/api/category/getCategories`).then((res)=>
       {
            setCategories(res.data.categories)
            
@@ -32,10 +33,10 @@ function UserDashboard() {
   
   const handleCategoryFilter=(id)=>
   {
-       axios.get(`http://localhost:5000/api/product/getProducts/${id}`).then((res)=>
+       axios.get(`${api}/api/product/getProducts/${id}`).then((res)=>
        {
         setCatProducts([...res.data])
-        console.log(res.data)
+        
         setCategorySelect(res.data[0].productCategory.category)
         
        })
@@ -51,14 +52,33 @@ function UserDashboard() {
       userId,
       productId
     }
+    const token = Cookies.get("token")
     const config={
-      headers:{"Content-Type":"application/json"},
+      headers:{"Content-Type":"application/json","token":token},
       "withCredentials":true
+      
      }
-    await axios.post("http://localhost:5000/api/cart/addtocart",data,config).then((res)=>
+    await axios.post(`${api}/api/cart/addtocart`,data,config).then((res)=>
     {
       console.log(res.data.message)
     })
+
+    // const requestOptions={
+     
+    //         headers: {
+    //             "Accept": "application/json",
+    //             "Content-Type": "application/json",
+    //             "token":token
+
+    //         },
+    //         credentials: "include",
+    //         method: "POST",
+    //         body: JSON.stringify(data)
+    // }
+
+    // let response= await fetch(`${api}/api/cart/addtocart`,requestOptions)
+    // response=await response.json()
+    // console.log(response)
     
   }
 
@@ -86,13 +106,13 @@ function UserDashboard() {
   <div className="thumbnails"></div>
   {products && 
   <div className="slides">
-    <div><img className='slideImg' src={`${products[0].productImage}`}></img></div>
-    <div><img className='slideImg' src={`${products[1].productImage}`}></img></div>
-    <div><img className='slideImg' src={`${products[2].productImage}`}></img></div>
-    <div><img className='slideImg' src={`${products[3].productImage}`}></img></div>
-    <div><img className='slideImg' src={`${products[4].productImage}`}></img></div>
-    <div><img className='slideImg' src={`${products[5].productImage}`}></img></div>
-    <div><img className='slideImg' src={`${products[6].productImage}`}></img></div>
+    <div><img alt='prodImg' className='slideImg' src={`${products[0].productImage}`}></img></div>
+    <div><img alt='prodImg' className='slideImg' src={`${products[1].productImage}`}></img></div>
+    <div><img alt='prodImg' className='slideImg' src={`${products[2].productImage}`}></img></div>
+    <div><img alt='prodImg' className='slideImg' src={`${products[3].productImage}`}></img></div>
+    <div><img alt='prodImg' className='slideImg' src={`${products[4].productImage}`}></img></div>
+    <div><img alt='prodImg' className='slideImg' src={`${products[5].productImage}`}></img></div>
+    <div><img alt='prodImg' className='slideImg' src={`${products[6].productImage}`}></img></div>
     
   </div>
  
@@ -176,7 +196,7 @@ function UserDashboard() {
           return(
             <div className='col-md-3'>
                 <div className="card" style={{width: "18rem"}}>
-  <img className="card-img-top" style={{height:"250px", width:"17.9rem"}} src={product.productImage} alt="Card image cap"></img>
+  <img className="card-img-top" style={{height:"250px", width:"17.9rem"}} src={product.productImage} alt="Card img cap"></img>
   <div className="card-body">
     <h5 className="card-title">{product.productName}</h5>
     <hr></hr>
@@ -203,7 +223,7 @@ function UserDashboard() {
           return(
             <div className='col-md-3'>
                 <div className="card" style={{width: "18rem"}}>
-  <img className="card-img-top" style={{height:"250px", width:"17.9rem"}} src={product.productImage} alt="Card image cap"></img>
+  <img className="card-img-top" style={{height:"250px", width:"17.9rem"}} src={product.productImage} alt="Card img cap"></img>
   <div className="card-body">
     <h5 className="card-title">{product.productName}</h5>
     <hr></hr>

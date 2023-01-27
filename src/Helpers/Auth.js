@@ -9,8 +9,7 @@ export const setAuthentication=(token,user)=>
 }
 export const isAuthenticated=()=>
 {
-    console.log(getCookie("token"))
-    console.log(getLocalStorage("user"))
+    
       if(getCookie("token") && getLocalStorage("user") )
       {
         return getLocalStorage("user")

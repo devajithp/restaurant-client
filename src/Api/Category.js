@@ -1,6 +1,6 @@
 import axios from "axios"
-
-
+import Cookies from 'js-cookie'
+const api="https://brick-red-angler-cape.cyclic.app"
 export const createCategory=async (category)=>
 {
    
@@ -8,14 +8,15 @@ export const createCategory=async (category)=>
         category
     }
     console.log(data)
+    const token = Cookies.get("token")
     let config={
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',"token":token
             
           },
           "withCredentials":true
        }
-  const response= await axios.post("http://localhost:5000/api/category/addCategory",data,config)
+  const response= await axios.post(`${api}/api/category/addCategory`,data,config)
    return response
 }
 
@@ -28,7 +29,7 @@ export const getCategories=async ()=>
           },
           "withCredentials":true
        }
-  const response= await axios.get("http://localhost:5000/api/category/getCategories",config)
+  const response= await axios.get(`${api}/api/category/getCategories`,config)
    return response
 }
 
