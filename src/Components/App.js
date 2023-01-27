@@ -38,6 +38,7 @@ function App() {
       <main>
         <Switch>
       <Route exact path="/"><Home></Home></Route>
+      <Route exact path="/restaurant-client"><Home></Home></Route>
       <Route exact path="/signup"><Signup></Signup></Route>
       <Route exact path="/signin"><Signin></Signin></Route>
       <UserRoute exact path="/user/dashboard" component={UserDashboard}></UserRoute>
