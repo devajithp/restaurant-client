@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Restaurant web-site
+This project is built using the following stacks :
+ ### React Js
+ ### Redux
+ ### Node JS
+ ### Express
+ ### MongoDB Mongoose Atlas
+ JWT Authorization, Admin and user dashboards, product listing and management, category management, COD and online payment(razorpay) are the main features in this project.
+ 
+ ## let's have a tour
+  ![Screenshot (185)](https://user-images.githubusercontent.com/114420318/215268353-851d4576-9577-46b7-bd3c-66fa15d4c6d5.png)
+  
+## User signin and signup pages
+![login](https://user-images.githubusercontent.com/114420318/215268812-686d5ffe-1dfe-48ad-8168-3e90d1fba8ac.png)
+![signup](https://user-images.githubusercontent.com/114420318/215268828-1f88dd09-d94d-4ce8-a9c3-7a0a52414bb1.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## User dashboard
+![user dashboard](https://user-images.githubusercontent.com/114420318/215269079-8b69b282-e1af-424f-8f58-e101de81c237.png)
+search and category filter features are added..<br><br>
+![category and search bar](https://user-images.githubusercontent.com/114420318/215269134-e1565db6-5e64-439a-bada-18d66efc7c0f.png)
+## Cart window
+![cart](https://user-images.githubusercontent.com/114420318/215269174-a67f707a-15cd-423d-b341-a3f06c67924d.png)
+## Payment window
+integrated online payment with the help of razorpay <br>
+![payment window](https://user-images.githubusercontent.com/114420318/215269245-40adf708-5eaf-41f6-a77e-fc19a7405326.png)
+## Orders view for user
+user can see their orders and also search for their order by date <br>
+![user orders](https://user-images.githubusercontent.com/114420318/215269288-d78a33d2-b737-4a55-b39f-61b60c09d388.png)
+## Admin dashboard
+Admin only have the access for category and product management, modals for adding category and food are given
+![category and search bar](https://user-images.githubusercontent.com/114420318/215269352-442a82ca-9dc7-4482-8c13-6694eb713ea4.png)
+![add category modal](https://user-images.githubusercontent.com/114420318/215269410-4532d077-ae72-431a-9b24-a3e042b872d9.png)
+![add food modal](https://user-images.githubusercontent.com/114420318/215269419-deeb0d91-6e24-420e-8198-96e0ff997a74.png)
+![edit food](https://user-images.githubusercontent.com/114420318/215269479-2ae80b45-1e9e-44f0-9aaf-f115f888aaaf.png)
+## Orders view for admin
+![admin orders](https://user-images.githubusercontent.com/114420318/215269515-e679b0ef-fed6-4f58-b961-7f9c0a376c9f.png)
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
