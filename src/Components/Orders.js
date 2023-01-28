@@ -46,13 +46,13 @@ const[search,setSearch]=useState("")
         <div>    
         <div className="card">
   <div className="card-body">
-    <div className='d-flex'>
-        <h5><span className='text-primary'>OrderId</span>: {order._id}</h5> 
+    
+        <h5><span className='text-secondary'>OrderId</span>: {order._id}</h5> 
         <h5 style={{marginLeft:"20px"}}><span className='text-primary'>Date</span>: {order.createdAt.slice(0,10)}</h5>
         
         
-    </div>
-    <h5 style={{marginLeft:"20px"}}><span className='text-danger'>Total</span>: {order.price}</h5>
+    
+    <h5 style={{marginLeft:"20px"}}><span className='text-primary'>Total</span>: {order.price}</h5>
     <hr></hr>
     <div>
     <table className="table">
