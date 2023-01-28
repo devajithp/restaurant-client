@@ -16,7 +16,7 @@ This project is built using the following stacks :
 
 ## User dashboard
 ![user dashboard](https://user-images.githubusercontent.com/114420318/215269079-8b69b282-e1af-424f-8f58-e101de81c237.png)
-search and category filter features are added..<br>
+search and category filter features are added..<br><br>
 ![category and search bar](https://user-images.githubusercontent.com/114420318/215269134-e1565db6-5e64-439a-bada-18d66efc7c0f.png)
 ## Cart window
 ![cart](https://user-images.githubusercontent.com/114420318/215269174-a67f707a-15cd-423d-b341-a3f06c67924d.png)
