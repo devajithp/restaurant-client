@@ -149,7 +149,7 @@ function Signup() {
     <div className='signup'>
       
       { showSignupForm()}
-      <p style={{color:"white"}}>{JSON.stringify(formData)}</p>
+      {/* <p style={{color:"white"}}>{JSON.stringify(formData)}</p> */}
       
     </div>
   )
