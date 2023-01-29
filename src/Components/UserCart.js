@@ -143,9 +143,9 @@ const UserCart = () => {
             <tr>
       <td><img alt="prodImg" style={{height:"75px",width:"75px"}} src={`${eachProduct.products.productId.productImage}`}></img></td>
       <td>{eachProduct.products.productId.productName}</td>
-      <td style={{width:"3%"}}><button onClick={()=>DecrementProduct(eachProduct.products.productId._id)} disabled={eachProduct.products.quantity===1 || incLoading} className='btn btn-secondary btn-sm'>{decLoading ?<div className="spinner-border spinner-border-sm" role="status"><span className="sr-only">Loading...</span></div>:<i className="fa-solid fa-arrow-down"></i>}</button></td>
+      <td style={{width:"3%"}}><button onClick={()=>DecrementProduct(eachProduct.products.productId._id)} disabled={eachProduct.products.quantity===1 || decLoading} className='btn btn-secondary btn-sm'><i className="fa-solid fa-arrow-down"></i></button></td>
       <td style={{width:"3%"}}>{eachProduct.products.quantity} </td> 
-      <td style={{width:"3%"}}><button onClick={()=>IncrementProduct(eachProduct.products.productId._id)} disabled={decLoading} className='btn btn-secondary btn-sm'>{incLoading ?<div className="spinner-border spinner-border-sm" role="status"><span className="sr-only">Loading...</span></div>:<i className="fa-solid fa-arrow-up"></i>}</button></td>
+      <td style={{width:"3%"}}><button onClick={()=>IncrementProduct(eachProduct.products.productId._id)} disabled={incLoading} className='btn btn-secondary btn-sm'><i className="fa-solid fa-arrow-up"></i></button></td>
       <td ><button onClick={()=>RemoveProduct(eachProduct.products.productId._id)} className='btn btn-danger btn-sm'><i class="fa-solid fa-trash"></i></button></td>
       <td>{eachProduct.total}</td>
     </tr> 
