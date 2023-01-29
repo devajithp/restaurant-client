@@ -11,6 +11,8 @@ const UserCart = () => {
     const [refresh,setRefresh]=useState(false)
     const history=useHistory()
     const {totalPrice,setTotalPrice}= useContext(thingsProvider)
+    const [incLoading,setIncLoading]=useState(false)
+    const [decLoading,setDecLoading]=useState(false)
     const api="https://brick-red-angler-cape.cyclic.app"
     useEffect(()=>
     {
@@ -51,10 +53,12 @@ const UserCart = () => {
         headers:{"Content-Type":"application/json","token":token},
         "withCredentials":true
        }
+       setIncLoading(true)
       axios.patch(`${api}/api/cart/incquantity`,data,config).then((res)=>
       {
         
         setRefresh(!refresh)
+        setIncLoading(false)
       })
     }
     const DecrementProduct=(productId)=>
@@ -70,10 +74,12 @@ const UserCart = () => {
         headers:{"Content-Type":"application/json","token":token},
         "withCredentials":true
        }
+       setDecLoading(true)
       axios.patch(`${api}/api/cart/decquantity`,data,config).then((res)=>
       {
         
         setRefresh(!refresh)
+        setDecLoading(false)
       })
       
     }
@@ -115,13 +121,15 @@ const UserCart = () => {
       {status && <div style={{textAlign:"center"}} className='container'>
       <h2 style={{margin:"auto"}}>Cart</h2>
          <div style={{marginTop:"10px"}} className='row'>
-            <div className='col-md-12'>
-            <table className="table">
+            <div style={{overflowX:"auto"}} className='col-md-12'>
+            <table style={{width:"100%"}} className="table">
   <thead>
     <tr>
       <th scope="col">Image</th>
       <th scope="col">Food</th>
-      <th scope="col">quantity</th>
+      <th scope="col"></th>
+      <th scope="col">Qty</th>
+      <th scope="col"></th>
       <th scope="col"></th>
       <th scope="col">price</th>
       
@@ -135,8 +143,10 @@ const UserCart = () => {
             <tr>
       <td><img alt="prodImg" style={{height:"75px",width:"75px"}} src={`${eachProduct.products.productId.productImage}`}></img></td>
       <td>{eachProduct.products.productId.productName}</td>
-      <td><button onClick={()=>DecrementProduct(eachProduct.products.productId._id)} disabled={eachProduct.products.quantity===1} className='btn btn-secondary btn-sm'><i className="fa-solid fa-arrow-down"></i></button> {eachProduct.products.quantity} <button onClick={()=>IncrementProduct(eachProduct.products.productId._id)} className='btn btn-secondary btn-sm'><i class="fa-solid fa-arrow-up"></i></button></td>
-      <td><button onClick={()=>RemoveProduct(eachProduct.products.productId._id)} className='btn btn-danger btn-sm'><i class="fa-solid fa-trash"></i></button></td>
+      <td style={{width:"3%"}}><button onClick={()=>DecrementProduct(eachProduct.products.productId._id)} disabled={eachProduct.products.quantity===1 || incLoading} className='btn btn-secondary btn-sm'>{decLoading ?<div className="spinner-border spinner-border-sm" role="status"><span className="sr-only">Loading...</span></div>:<i className="fa-solid fa-arrow-down"></i>}</button></td>
+      <td style={{width:"3%"}}>{eachProduct.products.quantity} </td> 
+      <td style={{width:"3%"}}><button onClick={()=>IncrementProduct(eachProduct.products.productId._id)} disabled={decLoading} className='btn btn-secondary btn-sm'>{incLoading ?<div className="spinner-border spinner-border-sm" role="status"><span className="sr-only">Loading...</span></div>:<i className="fa-solid fa-arrow-up"></i>}</button></td>
+      <td ><button onClick={()=>RemoveProduct(eachProduct.products.productId._id)} className='btn btn-danger btn-sm'><i class="fa-solid fa-trash"></i></button></td>
       <td>{eachProduct.total}</td>
     </tr> 
         )
